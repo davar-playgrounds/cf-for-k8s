@@ -21,3 +21,13 @@ eirini:
     image_repository: cloudfoundry/eirini-instance-index-env-injector-cf-for-k8s
     dockerfile: docker/instance-index-env-injector/Dockerfile
     source_path: eirini
+uaa:
+  uaa:
+    image_repository: cloudfoundry/uaa-cf-for-k8s
+    builder: paketobuildpacks/builder:full
+    source_path: uaa
+capi:
+  cloud_controller_ng:
+    image_repository: cloudfoundry/cloud-controller-ng-cf-for-k8s
+    builder: paketobuildpacks/builder:full
+    source_path: cloud_controller_ng

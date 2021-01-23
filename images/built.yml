@@ -1,22 +1,103 @@
-apiVersion: kbld.k14s.io/v1alpha1
-kind: Config
-minimumRequiredVersion: 0.27.0
-overrides:
-- image: cloudfoundry/eirini-eirini-controller-cf-for-k8s
-  newImage: kbld:cloudfoundry-eirini-eirini-controller-cf-for-k8s-sha256-5034713abef7c7c2722a09b495a241667905c2cae631cf904157ffd9ac733299
-  preresolved: true
-- image: cloudfoundry/eirini-event-reporter-cf-for-k8s
-  newImage: kbld:cloudfoundry-eirini-event-reporter-cf-for-k8s-sha256-d4e1e968491c9dba8f97ffd6ed0b52307d728082b8d98952a1282311d6fe2263
-  preresolved: true
-- image: cloudfoundry/eirini-instance-index-env-injector-cf-for-k8s
-  newImage: kbld:cloudfoundry-eirini-instance-index-env-injector-cf-sha256-e3fc0f78d9cb7e05dd5f1005608ace60a0829c75520a97a6f4e72bd1db76b89a
-  preresolved: true
-- image: cloudfoundry/eirini-opi-cf-for-k8s
-  newImage: kbld:cloudfoundry-eirini-opi-cf-for-k8s-sha256-2747ce37fb56a4fb5fd6a67805cdc8d13152e9f2db942182c47aee9fdc725f36
-  preresolved: true
-- image: cloudfoundry/eirini-task-reporter-cf-for-k8s
-  newImage: kbld:cloudfoundry-eirini-task-reporter-cf-for-k8s-sha256-da51164b7e53b36eb9b450d905530f3b69a805525d5bd41782a83048042a3f4e
-  preresolved: true
-searchRules:
-- keyMatcher:
-    name: image_repository
+---
+capi:
+  cloud_controller_ng:
+    builder: paketobuildpacks/builder:full
+    image_repository: kbld:cloudfoundry-cloud-controller-ng-cf-for-k8s-sha256-6a56660424e9fcf782dcce20cbb27f7ab5ad50e0c2fcf81df083b602e6ff37d3
+    source_path: cloud_controller_ng
+eirini:
+  eirini_controller:
+    dockerfile: docker/eirini-controller/Dockerfile
+    image_repository: kbld:cloudfoundry-eirini-eirini-controller-cf-for-k8s-sha256-7fd7c9a89892cab5716195f16d1b1052b6a969282a9edca8dcd524cb4d8b1116
+    source_path: eirini
+  event_reporter:
+    dockerfile: docker/event-reporter/Dockerfile
+    image_repository: kbld:cloudfoundry-eirini-event-reporter-cf-for-k8s-sha256-62cd23568ef320ae03d65d39082933f2eac446154bd555d0b875f88319c82919
+    source_path: eirini
+  instance_index_env_injector:
+    dockerfile: docker/instance-index-env-injector/Dockerfile
+    image_repository: kbld:cloudfoundry-eirini-instance-index-env-injector-cf-sha256-1d90afe8057807b5b2f2e7efe4ebde0172d58c48f9ad034f87652849f5749b3c
+    source_path: eirini
+  opi:
+    dockerfile: docker/opi/Dockerfile
+    image_repository: kbld:cloudfoundry-eirini-opi-cf-for-k8s-sha256-59aa1220e0aa7c6fdc7618b54644966735fc95b2ffc8298ce36e1522b01a8336
+    source_path: eirini
+  task_reporter:
+    dockerfile: docker/task-reporter/Dockerfile
+    image_repository: kbld:cloudfoundry-eirini-task-reporter-cf-for-k8s-sha256-188c9a391fb86346f7042781caf8e82d033ee1f40528cc6f5415824cee144546
+    source_path: eirini
+metadata:
+  annotations:
+    kbld.k14s.io/images: |
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/cloud_controller_ng
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry/cloud_controller_ng.git
+          SHA: 100472267bc0d3b96481d421e65ff40b8fd6d3b1
+          Type: git
+        URL: kbld:cloudfoundry-cloud-controller-ng-cf-for-k8s-sha256-6a56660424e9fcf782dcce20cbb27f7ab5ad50e0c2fcf81df083b602e6ff37d3
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/eirini
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry-incubator/eirini.git
+          SHA: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+          Tags:
+          - 2.0.0
+          Type: git
+        URL: kbld:cloudfoundry-eirini-eirini-controller-cf-for-k8s-sha256-7fd7c9a89892cab5716195f16d1b1052b6a969282a9edca8dcd524cb4d8b1116
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/eirini
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry-incubator/eirini.git
+          SHA: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+          Tags:
+          - 2.0.0
+          Type: git
+        URL: kbld:cloudfoundry-eirini-event-reporter-cf-for-k8s-sha256-62cd23568ef320ae03d65d39082933f2eac446154bd555d0b875f88319c82919
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/eirini
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry-incubator/eirini.git
+          SHA: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+          Tags:
+          - 2.0.0
+          Type: git
+        URL: kbld:cloudfoundry-eirini-instance-index-env-injector-cf-sha256-1d90afe8057807b5b2f2e7efe4ebde0172d58c48f9ad034f87652849f5749b3c
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/eirini
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry-incubator/eirini.git
+          SHA: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+          Tags:
+          - 2.0.0
+          Type: git
+        URL: kbld:cloudfoundry-eirini-opi-cf-for-k8s-sha256-59aa1220e0aa7c6fdc7618b54644966735fc95b2ffc8298ce36e1522b01a8336
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/eirini
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry-incubator/eirini.git
+          SHA: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+          Tags:
+          - 2.0.0
+          Type: git
+        URL: kbld:cloudfoundry-eirini-task-reporter-cf-for-k8s-sha256-188c9a391fb86346f7042781caf8e82d033ee1f40528cc6f5415824cee144546
+      - Metas:
+        - Path: /home/birdrock/workspace/cf-for-k8s/images/uaa
+          Type: local
+        - Dirty: false
+          RemoteURL: https://github.com/cloudfoundry/uaa.git
+          SHA: d8cc5004d4cd6c4ecc733f9f3fb97ec346386c12
+          Tags:
+          - v74.31.0
+          Type: git
+        URL: kbld:cloudfoundry-uaa-cf-for-k8s-sha256-e939d9bdd6a6182fdaf9743222a1b8b9d9e24b0f69e2e9e06563e7c123468705
+uaa:
+  uaa:
+    builder: paketobuildpacks/builder:full
+    image_repository: kbld:cloudfoundry-uaa-cf-for-k8s-sha256-e939d9bdd6a6182fdaf9743222a1b8b9d9e24b0f69e2e9e06563e7c123468705
+    source_path: uaa

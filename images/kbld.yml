@@ -5,19 +5,37 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 
 sources:
-#@ components = struct.decode(data.values)
-#@ for component in components:
-  #@ for key in components[component]:
-  #@ image = struct.encode(components[component][key])
-  - image: #@ image.image_repository
-    path: #@ image.source_path
+#! Eirini images
+#@ eirini = struct.decode(data.values.eirini)
+#@ for key in eirini:
+  #@ subcomponent = struct.encode(eirini[key])
+  - image: #@ subcomponent.image_repository
+    path: #@ subcomponent.source_path
     docker:
       build:
-        file: #@ image.dockerfile
+        file: #@ subcomponent.dockerfile
         buildkit: true
         rawOptions: ["--build-arg", "GIT_SHA=12345"]
-  #@ end
 #@ end
+
+#! UAA images
+#@ uaa = data.values.uaa
+  - image: #@ uaa.uaa.image_repository
+    path: #@ uaa.uaa.source_path
+    pack:
+      build:
+        builder: #@ uaa.uaa.builder
+        rawOptions: ["--env", "BP_GRADLE_BUILT_MODULE=uaa"]
+
+#! CAPI images
+#@ capi = data.values.capi
+  - image: #@ capi.cloud_controller_ng.image_repository
+    path: #@ capi.cloud_controller_ng.source_path
+    pack:
+      build:
+        builder: paketobuildpacks/builder:full
+        buildpacks:
+          - gcr.io/paketo-community/ruby
 
 searchRules:
   - keyMatcher:
