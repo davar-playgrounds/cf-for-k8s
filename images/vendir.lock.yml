@@ -1,0 +1,25 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Bump go packages
+      sha: 3dcf72f6ed2f3223c948f1093390c7488c2a6335
+      tags:
+      - 2.0.0
+    path: .
+  path: eirini
+- contents:
+  - git:
+      commitTitle: Update UAA image reference in k8s deployment template to 74.31.0
+      sha: d8cc5004d4cd6c4ecc733f9f3fb97ec346386c12
+      tags:
+      - v74.31.0
+    path: .
+  path: uaa
+- contents:
+  - git:
+      commitTitle: Upgrage rubocop to 1.8.1...
+      sha: 100472267bc0d3b96481d421e65ff40b8fd6d3b1
+    path: .
+  path: cloud_controller_ng
+kind: LockConfig
