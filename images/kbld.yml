@@ -9,7 +9,7 @@ sources:
 #@ eirini = struct.decode(data.values.eirini)
 #@ for key in eirini:
   #@ subcomponent = struct.encode(eirini[key])
-  - image: #@ subcomponent.image_repository
+  - imageRepo: #@ subcomponent.image_repository
     path: #@ subcomponent.source_path
     docker:
       build:
@@ -20,7 +20,7 @@ sources:
 
 #! UAA images
 #@ uaa = data.values.uaa
-  - image: #@ uaa.uaa.image_repository
+  - imageRepo: #@ uaa.uaa.image_repository
     path: #@ uaa.uaa.source_path
     pack:
       build:
@@ -29,14 +29,10 @@ sources:
 
 #! CAPI images
 #@ capi = data.values.capi
-  - image: #@ capi.cloud_controller_ng.image_repository
+  - imageRepo: #@ capi.cloud_controller_ng.image_repository
     path: #@ capi.cloud_controller_ng.source_path
     pack:
       build:
         builder: paketobuildpacks/builder:full
         buildpacks:
           - gcr.io/paketo-community/ruby
-
-searchRules:
-  - keyMatcher:
-      name: image_repository
