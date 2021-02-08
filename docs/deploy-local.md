@@ -47,6 +47,16 @@ Configuration Notes:
 1. The docker driver for minikube is significantly faster than the default
    virtualbox driver as it uses the local Docker for Mac installation.
 
+1. Here's how many apps cf-for-k8s (v1.0) was able to support on a tiny 4CPU/6GB KinD cluster
+
+| **app**    | **cf memory** | **cf push count with first error** | **error type**       |
+| ------ | --------- | ------------------------------ | ---------------- |
+| catnip | 16M       | 12                             | Insufficient cpu |
+| node | 16M       | 13                             | Insufficient cpu |
+| java | 600M       | 4                             | Insufficient memory |
+| spring-petclinic | 1G       | 1                             | Staging timeout |
+| spring-petclinic with "retries" | 1G       | 3                             | Insufficient memory |
+
 ## Steps to Deploy on KinD
 
 0. (Optional) Choose the version of Kubernetes you'd like to use to deploy KinD.
@@ -55,6 +65,7 @@ Configuration Notes:
 
    ```console
    # from the cf-for-k8s repo/directory
+   # NOTE: this project uses python yq module (https://kislyuk.github.io/yq/)
    k8s_minor_version="$(yq -r .newest_version supported_k8s_versions.yml)"  # or k8s_minor_version="1.17"
    patch_version=$(wget -q https://registry.hub.docker.com/v1/repositories/kindest/node/tags -O - | \
      jq -r '.[].name' | grep -E "^v${k8s_minor_version}.[0-9]+$" | \

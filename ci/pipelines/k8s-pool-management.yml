@@ -388,25 +388,25 @@ jobs:
           output_file="message/message.txt"
 
           function print_env_info {
-            # Colors
-            local red blue
-            # red='\033[0;31m'
-            # blue='\033[0;34m'
-            # nc='\033[0m'
-            red=''
-            blue=''
-            nc=''
-
-            echo -e "${blue}Rounding up claimed environments...${nc}"
+            echo -e "Rounding up claimed environments..."
 
             pushd "${pool_dir}/claimed" > /dev/null
               claimed_files="$(git log --reverse --name-only --pretty=format: -- * | sort -u | xargs)"
 
-              output="${blue}\n* ENV *\t* CLAIMED BY *\t* CLAIMED ON *\t* CLAIMED SINCE *\t* STORY *\n"
+              output="\n* ENV *\t* CLAIMED BY *\t* CLAIMED ON *\t* CLAIMED SINCE *\t* STORY *\n"
 
               for file in ${claimed_files}; do
                 echo "Processing ${file}..." >&2
                 file="$(basename "${file}")"
+
+                if [[ "${file}" == ".gitkeep" ]]; then
+                  # If the first file in the list is .gitkeep, then there aren't any claimed environments.
+                  output=""
+                  echo -e "\nLooks like everything is good here."
+                  echo "No claimed environments." >&2
+                  break
+                fi
+
                 author="$(git log --max-count=1 --pretty='format:%an' "${file}")"
                 committer="$(git log --max-count=1 --pretty='format:%cn' "${file}")"
                 claimed_since="$(git log --max-count=1 --pretty='format:%ar' "${file}")"

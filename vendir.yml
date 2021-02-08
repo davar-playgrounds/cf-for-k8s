@@ -8,7 +8,7 @@ directories:
   - path: .
     git:
       url: https://github.com/cloudfoundry/capi-k8s-release
-      ref: 484f0b3dd216e1279833436a1d39268ab6848eb9
+      ref: c476d88c5250e9f333d689423b2bf35a5ec549fc
     includePaths:
     - templates/**/*
     - values/**/*
@@ -41,7 +41,7 @@ directories:
   - path: .
     git:
       url: https://github.com/cloudfoundry/uaa
-      ref: v74.30.0
+      ref: v75.0.0
     includePaths:
     - k8s/templates/**/*
 - path: config/kpack/_ytt_lib/kpack
@@ -49,7 +49,7 @@ directories:
   - path: .
     githubRelease:
       slug: pivotal/kpack
-      tag: v0.1.4
+      tag: v0.2.0
       disableAutoChecksumValidation: true
     includePaths:
     - release-*.yaml

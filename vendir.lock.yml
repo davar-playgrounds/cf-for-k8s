@@ -3,9 +3,9 @@ directories:
 - contents:
   - git:
       commitTitle: images.yml updated by CI...
-      sha: 484f0b3dd216e1279833436a1d39268ab6848eb9
+      sha: c476d88c5250e9f333d689423b2bf35a5ec549fc
       tags:
-      - v0.4.0-159-g484f0b3
+      - v0.4.0-178-gc476d88
     path: .
   path: config/capi/_ytt_lib/capi-k8s-release
 - contents:
@@ -28,15 +28,15 @@ directories:
   path: config/metrics/_ytt_lib/metric-proxy
 - contents:
   - git:
-      commitTitle: Update UAA image reference in k8s deployment template to 74.30.0
-      sha: 90647e5c2c4e6be19e758a6555037e1893c50d88
+      commitTitle: Update UAA image reference in k8s deployment template to 75.0.0
+      sha: 1cc0557f10be15940d6fb9c10e7469b2412a8bca
       tags:
-      - v74.30.0
+      - v75.0.0
     path: .
   path: config/uaa/_ytt_lib/uaa
 - contents:
   - githubRelease:
-      url: https://api.github.com/repos/pivotal/kpack/releases/34245146
+      url: https://api.github.com/repos/pivotal/kpack/releases/37430197
     path: .
   path: config/kpack/_ytt_lib/kpack
 - contents:

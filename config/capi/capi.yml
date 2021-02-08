@@ -14,6 +14,9 @@
 #@ end
 
 #@ def capi_values():
+images:
+  statsd_exporter: #@ data.values.images.shared.statsd_exporter
+
 system_namespace: #@ system_namespace()
 workloads_namespace: #@ workloads_namespace()
 staging_namespace: #@ workloads_staging_namespace()
@@ -48,8 +51,6 @@ ccdb:
   ca_cert: #@ data.values.capi.database.ca_cert
 
 uaa:
-  serverCerts:
-    secretName: uaa-certs
   clients:
     cloud_controller_username_lookup:
       secret_name: cloud-controller-username-lookup-client-secret
