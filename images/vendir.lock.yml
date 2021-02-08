@@ -18,8 +18,8 @@ directories:
   path: uaa
 - contents:
   - git:
-      commitTitle: Upgrage rubocop to 1.8.1...
-      sha: 100472267bc0d3b96481d421e65ff40b8fd6d3b1
+      commitTitle: 'perf: eager loading in decorators (#2109)...'
+      sha: 8887877b9dfc9237a34ffcbf54ac3cf58d680d48
     path: .
   path: cloud_controller_ng
 kind: LockConfig
