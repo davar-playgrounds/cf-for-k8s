@@ -1,0 +1,21 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:struct", "struct")
+---
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.28.0
+
+sources:
+#@ images = struct.decode(data.values)
+#@ for key in images:
+  #@ subcomponent = struct.encode(images[key])
+  - imageRepo: #@ subcomponent.image_repository
+    path: #@ subcomponent.source_path
+    docker:
+      build:
+        file: #@ subcomponent.dockerfile
+        buildkit: true
+        rawOptions:
+        - "--build-arg"
+        - #@ "GIT_SHA=" + #@ subcomponent.git_sha
+#@ end

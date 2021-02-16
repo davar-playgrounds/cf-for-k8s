@@ -1,0 +1,49 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.28.0
+sources:
+- imageRepo: index.docker.io/cloudfoundry/eirini-opi-cf-for-k8s
+  path: eirini
+  docker:
+    build:
+      file: docker/opi/Dockerfile
+      buildkit: true
+      rawOptions:
+      - --build-arg
+      - GIT_SHA=12345
+- imageRepo: index.docker.io/cloudfoundry/eirini-event-reporter-cf-for-k8s
+  path: eirini
+  docker:
+    build:
+      file: docker/event-reporter/Dockerfile
+      buildkit: true
+      rawOptions:
+      - --build-arg
+      - GIT_SHA=12345
+- imageRepo: index.docker.io/cloudfoundry/eirini-eirini-controller-cf-for-k8s
+  path: eirini
+  docker:
+    build:
+      file: docker/eirini-controller/Dockerfile
+      buildkit: true
+      rawOptions:
+      - --build-arg
+      - GIT_SHA=12345
+- imageRepo: index.docker.io/cloudfoundry/eirini-task-reporter-cf-for-k8s
+  path: eirini
+  docker:
+    build:
+      file: docker/task-reporter/Dockerfile
+      buildkit: true
+      rawOptions:
+      - --build-arg
+      - GIT_SHA=12345
+- imageRepo: index.docker.io/cloudfoundry/eirini-instance-index-env-injector-cf-for-k8s
+  path: eirini
+  docker:
+    build:
+      file: docker/instance-index-env-injector/Dockerfile
+      buildkit: true
+      rawOptions:
+      - --build-arg
+      - GIT_SHA=12345
