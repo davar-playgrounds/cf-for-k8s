@@ -6,9 +6,9 @@ kind: Config
 minimumRequiredVersion: 0.28.0
 
 sources:
-#@ images = struct.decode(data.values)
-#@ for key in images:
-  #@ subcomponent = struct.encode(images[key])
+#@ images = struct.decode(data.values.eirini)
+#@ for key in images["image_meta"]:
+  #@ subcomponent = struct.encode(images["image_meta"][key])
   - imageRepo: #@ subcomponent.image_repository
     path: #@ subcomponent.source_path
     docker:
@@ -17,5 +17,5 @@ sources:
         buildkit: true
         rawOptions:
         - "--build-arg"
-        - #@ "GIT_SHA=" + #@ subcomponent.git_sha
+        - #@ "GIT_SHA=" + images["git_sha"]
 #@ end

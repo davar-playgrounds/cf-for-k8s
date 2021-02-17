@@ -1,23 +1,25 @@
 #@data/values
 ---
 eirini:
-  opi:
-    image_repository: index.docker.io/cloudfoundry/eirini-opi-cf-for-k8s
-    dockerfile: docker/opi/Dockerfile
-    source_path: eirini
-  event_reporter:
-    image_repository: index.docker.io/cloudfoundry/eirini-event-reporter-cf-for-k8s
-    dockerfile: docker/event-reporter/Dockerfile
-    source_path: eirini
-  eirini_controller:
-    image_repository: index.docker.io/cloudfoundry/eirini-eirini-controller-cf-for-k8s
-    dockerfile: docker/eirini-controller/Dockerfile
-    source_path: eirini
-  task_reporter:
-    image_repository: index.docker.io/cloudfoundry/eirini-task-reporter-cf-for-k8s
-    dockerfile: docker/task-reporter/Dockerfile
-    source_path: eirini
-  instance_index_env_injector:
-    image_repository: index.docker.io/cloudfoundry/eirini-instance-index-env-injector-cf-for-k8s
-    dockerfile: docker/instance-index-env-injector/Dockerfile
-    source_path: eirini
+  git_sha:
+  image_meta:
+    opi:
+      image_repository: index.docker.io/cloudfoundry/eirini-opi-cf-for-k8s
+      dockerfile: docker/opi/Dockerfile
+      source_path: repo
+    event_reporter:
+      image_repository: index.docker.io/cloudfoundry/eirini-event-reporter-cf-for-k8s
+      dockerfile: docker/event-reporter/Dockerfile
+      source_path: repo
+    eirini_controller:
+      image_repository: index.docker.io/cloudfoundry/eirini-eirini-controller-cf-for-k8s
+      dockerfile: docker/eirini-controller/Dockerfile
+      source_path: repo
+    task_reporter:
+      image_repository: index.docker.io/cloudfoundry/eirini-task-reporter-cf-for-k8s
+      dockerfile: docker/task-reporter/Dockerfile
+      source_path: repo
+    instance_index_env_injector:
+      image_repository: index.docker.io/cloudfoundry/eirini-instance-index-env-injector-cf-for-k8s
+      dockerfile: docker/instance-index-env-injector/Dockerfile
+      source_path: repo
