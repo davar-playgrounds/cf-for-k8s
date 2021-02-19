@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-${SCRIPT_DIR}/generate.sh "$@" | kbld -f - > "${SCRIPT_DIR}/../../config/istio/istio-generated/xxx-generated-istio.yaml"
+${SCRIPT_DIR}/generate.sh "$@" > "${SCRIPT_DIR}/../../config/istio/istio-generated/xxx-generated-istio.yaml"
 
 # save the current Istio version in the networking configs
 # NOTE: this project uses python yq module (https://kislyuk.github.io/yq/)
